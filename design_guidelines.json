@@ -1,0 +1,106 @@
+{
+  "theme": "dark",
+  "archetype": "Swiss & High-Contrast (Dark Variant)",
+  "typography": {
+    "primary_font": "IBM Plex Sans",
+    "mono_font": "JetBrains Mono",
+    "headings": {
+      "fontFamily": "'IBM Plex Sans', sans-serif",
+      "weight": "font-black",
+      "tracking": "tracking-tight"
+    },
+    "body": {
+      "fontFamily": "'IBM Plex Sans', sans-serif",
+      "weight": "font-light",
+      "leading": "leading-relaxed"
+    },
+    "labels": {
+      "fontFamily": "'IBM Plex Sans', sans-serif",
+      "weight": "font-semibold",
+      "tracking": "tracking-[0.2em]",
+      "textTransform": "uppercase",
+      "size": "text-xs"
+    }
+  },
+  "colors": {
+    "background": "#000000",
+    "surface": "#0a0a0a",
+    "surface_hover": "#171717",
+    "border": "#262626",
+    "text_primary": "#ffffff",
+    "text_secondary": "#a3a3a3",
+    "primary_cta": "#ffffff",
+    "primary_cta_text": "#000000",
+    "semantic": {
+      "todo": "#737373",
+      "in_progress": "#f59e0b",
+      "done": "#10b981",
+      "priority_low": "#3b82f6",
+      "priority_medium": "#f59e0b",
+      "priority_high": "#ef4444"
+    }
+  },
+  "surface_strategy": {
+    "name": "Grid Borders (The Technical Look)",
+    "description": "Expose the skeleton. Data-heavy dashboards should use a visible grid to organize complex task information.",
+    "rules": [
+      "Container layout uses border-collapse or tight grid with 1px borders.",
+      "Grid Items: border-r border-b border-neutral-800.",
+      "Flat solid backgrounds, 1px subtle border, absolutely no soft shadows.",
+      "Hover: Slight background color shift (hover:bg-neutral-900) rather than floating."
+    ]
+  },
+  "layouts": {
+    "global": "Mobile-first responsive. Left-aligned content for optimal readability in data-dense areas.",
+    "dashboard": "High Density Grid. Base Grid: grid-cols-1 md:grid-cols-4. Gap Strategy: Tight (gap-0) because we use structural Grid Borders to separate content.",
+    "login": "Split screen layout: Left side contains the abstract dark minimal geometry image (full bleed), Right side contains the centered login form with generous padding (p-12 to p-24)."
+  },
+  "motion": {
+    "hover": "Subtle background color change (transition: background-color 0.2s ease), text color brightens.",
+    "click": "scale-[0.98] active state.",
+    "entrance": "Staggered fade-up for task list items using framer-motion (y: 10, opacity: 0 to 1)."
+  },
+  "components": {
+    "cards": "Cardless design. Flat geometric panels with sharp edges (rounded-none). Use 1px neutral-800 borders.",
+    "buttons": "Sharp edges (rounded-none). Primary buttons use high contrast (bg-white text-black). Secondary buttons are transparent with 1px borders.",
+    "inputs": "Flat, background matching surface, clear 1px borders. focus:ring-1 focus:ring-white focus:outline-none.",
+    "charts": "Shadcn Recharts components, styled with semantic colors (Emerald, Amber, Red). No gradients in charts, use solid fills or 20% opacity fills.",
+    "icons": "lucide-react for a clean, consistent look. No emoji icons."
+  },
+  "image_urls": [
+    {
+      "url": "https://images.unsplash.com/photo-1640346876473-f76a73c71539?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDk1Nzd8MHwxfHNlYXJjaHwyfHxhYnN0cmFjdCUyMGRhcmslMjBtaW5pbWFsJTIwZ2VvbWV0cnl8ZW58MHx8fHwxNzc0NDQwNzcxfDA&ixlib=rb-4.1.0&q=85",
+      "category": "Authentication Background",
+      "description": "Black and white abstract cube wall. Use this as an object-cover background image for the visual half of the Login/Signup split screen."
+    }
+  ],
+  "accessibility": {
+    "contrast": "Ensure APCA contrast standards. White text on dark backgrounds must have sufficient contrast.",
+    "focus": "All interactive elements must have clear focus rings.",
+    "reduced_motion": "Respect prefers-reduced-motion media query for animations."
+  },
+  "3d_libraries": {
+    "usage": "None. Keep the application 2D, dense, and hyper-performant."
+  },
+  "instructions_to_main_agent": [
+    "Use lucide-react (already installed) for all icons.",
+    "Import 'IBM Plex Sans' from Google Fonts in index.html or layout, and apply it globally.",
+    "Implement the 'Grid Borders' style for the dashboard: the main content area should look like a structured grid where stat cards and lists share common 1px borders.",
+    "For the task list, build a dense, list-like layout with hover:bg-neutral-900 effects.",
+    "DO NOT use default Shadcn Card with heavy shadows and rounded corners; customize it to be flat, with a sharp 1px border and no shadow (rounded-none).",
+    "Ensure all semantic colors (Todo, In Progress, Done, Priorities) are implemented consistently.",
+    "All interactive elements MUST include data-testid attributes (e.g., data-testid='create-task-button').",
+    "Use framer-motion for simple staggered entrance animations on the task list."
+  ],
+  "UNIVERSAL GUIDELINES FOR MAIN AGENT": [
+    "You tend to converge toward generic outputs. Avoid 'AI slop' aesthetic. Make it distinctive and authoritative.",
+    "Dark colors look good when used independently without gradients. DO NOT use dark colors as gradients.",
+    "Don't make generic centered layouts. DO NOT center align the app container (.App { text-align: center; } is FORBIDDEN).",
+    "Create depth through layered design elements with z-index hierarchy, even in flat design.",
+    "You MUST NOT apply universal transition (transition: all). Add transitions for specific interactive elements only.",
+    "NEVER use emoji characters for icons.",
+    "Use generous padding within containers to provide breathing room, but keep inter-component gaps tight if using Grid Borders.",
+    "Use `sonner` for toasts. It is in /app/src/components/ui/sonner.tsx.",
+    "Components MUST use named exports, Pages MUST use default exports."
+  ]
+}
