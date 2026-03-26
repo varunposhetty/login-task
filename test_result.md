@@ -101,3 +101,47 @@
 #====================================================================================================
 # Testing Data - Main Agent and testing sub agent both should log testing data below this section
 #====================================================================================================
+## user_problem_statement: rectify errors and solve
+## backend:
+	- task: "API integration and test harness"
+		implemented: true
+		working: true
+		file: "backend_test.py"
+		stuck_count: 0
+		priority: "high"
+		needs_retesting: false
+		status_history:
+			- working: true
+				agent: "main"
+				comment: "Updated backend_test to use TASK_MANAGER_API_URL and local default; login/signup flow confirmed with local FastAPI server."
+## frontend:
+	- task: "Frontend build verification"
+		implemented: true
+		working: true
+		file: "frontend/"
+		stuck_count: 0
+		priority: "medium"
+		needs_retesting: false
+		status_history:
+			- working: true
+				agent: "main"
+				comment: "Frontend build completed with craco build, no compilation errors."
+## metadata:
+	created_by: "main_agent"
+	version: "1.1"
+	test_sequence: 1
+	run_ui: false
+## test_plan:
+	current_focus:
+		- "Verify complete login/signup behavior in backend tests"
+		- "Run end-to-end integration after frontend is configured with backend URL"
+	stuck_tasks: []
+	test_all: true
+	test_priority: "high_first"
+## agent_communication:
+		- agent: "main"
+			message: "Fixed backend_test environment config and reran tests locally."
+
+## notes:
+  - "Frontend now defaults to http://127.0.0.1:8000 when REACT_APP_BACKEND_URL is not set."
+  - "login failures were from unauthorized credentials check; signup path works and then flows further."

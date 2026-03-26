@@ -2,10 +2,11 @@ import requests
 import sys
 import json
 from datetime import datetime, timedelta
+import os
 
 class TaskManagerAPITester:
-    def __init__(self, base_url="https://task-hub-869.preview.emergentagent.com"):
-        self.base_url = base_url
+    def __init__(self, base_url=None):
+        self.base_url = base_url or os.environ.get('TASK_MANAGER_API_URL', 'http://127.0.0.1:8000')
         self.token = None
         self.tests_run = 0
         self.tests_passed = 0
@@ -28,7 +29,9 @@ class TaskManagerAPITester:
 
     def run_test(self, name, method, endpoint, expected_status, data=None, headers=None):
         """Run a single API test"""
-        url = f"{self.base_url}/api/{endpoint}"
+        cleaned_base = self.base_url.rstrip('/')
+        cleaned_endpoint = endpoint.lstrip('/')
+        url = f"{cleaned_base}/api/{cleaned_endpoint}"
         test_headers = {'Content-Type': 'application/json'}
         if self.token:
             test_headers['Authorization'] = f'Bearer {self.token}'
@@ -86,8 +89,8 @@ class TaskManagerAPITester:
     def test_auth_login(self):
         """Test user login with existing test user"""
         login_data = {
-            "email": "test@example.com",
-            "password": "password123"
+            "email": os.environ.get('TEST_USER_EMAIL', 'test@example.com'),
+            "password": os.environ.get('TEST_USER_PASSWORD', 'password123')
         }
         
         success, response = self.run_test(
